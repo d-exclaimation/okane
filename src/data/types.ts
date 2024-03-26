@@ -11,6 +11,8 @@ export const KindToEmojis = {
   Misc: "🤷‍♂️",
 };
 
+export const DailyBudget = 45;
+
 export type Record = z.infer<typeof Record>;
 export const Record = z.object({
   id: z.string(),

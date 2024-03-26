@@ -6,6 +6,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { useMemo, useState } from "react";
 import { Fragment } from "react/jsx-runtime";
+import { DailyBudget } from "../../data/types";
 import { useSavedUp } from "../../hook/use-saved-up";
 import { dollarsAndCents } from "../../utils/money";
 import AmountShowcase from "./amount-showcase";
@@ -19,7 +20,7 @@ const Home = () => {
   const [dollars, cents] = useMemo(() => {
     const value =
       showcase === "saved"
-        ? weekly.length * 50 - totalOfTheWeek
+        ? weekly.length * DailyBudget - totalOfTheWeek
         : totalOfTheWeek;
     return dollarsAndCents(value);
   }, [totalOfTheWeek, showcase]);

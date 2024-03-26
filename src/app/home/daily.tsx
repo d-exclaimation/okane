@@ -1,5 +1,5 @@
 import * as R from "remeda";
-import { KindToEmojis, RecordWithDate } from "../../data/types";
+import { DailyBudget, KindToEmojis, RecordWithDate } from "../../data/types";
 import { tlsx } from "../../utils/tlsx";
 
 const EMOJIS: Record<string, string> = KindToEmojis;
@@ -16,7 +16,7 @@ const Daily = ({ date, records }: DailyProps) => {
 
   const saved = R.pipe(
     records,
-    R.sumBy((x) => 50 - x.amount)
+    R.sumBy((x) => DailyBudget - x.amount)
   );
 
   return (
@@ -43,7 +43,7 @@ const Daily = ({ date, records }: DailyProps) => {
         </div>
       </div>
       {records.map(({ amount, id, kind }) => {
-        const saved = 50 - amount;
+        const saved = DailyBudget - amount;
         return (
           <div key={id} className="w-full flex items-center justify-between">
             <span className="text-3xl p-5">{EMOJIS[kind]}</span>
@@ -56,7 +56,7 @@ const Daily = ({ date, records }: DailyProps) => {
                 })}
               >
                 {saved >= 0 ? "+" : "-"}
-                {Math.abs(50 - amount).toFixed(2)}
+                {saved.toFixed(2)}
               </span>
             </div>
           </div>

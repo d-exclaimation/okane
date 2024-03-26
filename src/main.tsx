@@ -5,6 +5,7 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "./app";
 import Home from "./app/home";
+import Settings from "./app/settings";
 import "./index.css";
 
 const queryClient = new QueryClient();
@@ -19,11 +20,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/settings",
-        element: (
-          <div className="grid place-items-center w-screen h-screen-safe">
-            Settings
-          </div>
-        ),
+        element: <Settings />,
       },
     ],
   },
