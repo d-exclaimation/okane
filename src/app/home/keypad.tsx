@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { tlsx } from "../../utils/tlsx";
 
 type Key = {
   label: string;
@@ -58,10 +59,10 @@ const Keypad = ({ value, setValue }: KeypadProps) => {
         </button>
       ))}
       <button
-        className="w-full h-full [aspect-ratio:5/4] flex items-center justify-center border rounded-lg text-2xl transition-all duration-300 active:bg-neutral-100"
-        onClick={() => setValue(-value)}
+        className="w-full h-full [aspect-ratio:5/4] flex items-center justify-center border rounded-lg text-2xl text-red-600 transition-all duration-300 active:bg-neutral-100"
+        onClick={() => setValue(0)}
       >
-        ±
+        C
       </button>
 
       <button
@@ -71,7 +72,11 @@ const Keypad = ({ value, setValue }: KeypadProps) => {
         0
       </button>
       <button
-        className="w-full h-full [aspect-ratio:5/4] flex items-center justify-center border rounded-lg text-2xl transition-all duration-300 active:bg-neutral-100"
+        className={tlsx(
+          "w-full h-full [aspect-ratio:5/4] flex items-center justify-center border rounded-lg text-2xl transition-all duration-300 active:bg-neutral-100",
+          { "text-emerald-600": isDollar },
+          { "text-amber-600": !isDollar }
+        )}
         onClick={() => setDollar((prev) => !prev)}
       >
         {isDollar ? "$" : "¢"}

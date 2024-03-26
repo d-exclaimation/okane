@@ -41,25 +41,17 @@ const NewRecord = () => {
 
             <Keypad value={amount} setValue={setAmount} />
 
-            <div className="w-full flex items-center justify-between mt-4 gap-12">
-              <button
-                className="bg-red-500 flex-1 py-2.5 rounded-md text-white text-lg active:bg-red-600"
-                onClick={() => setAmount(0)}
-              >
-                Clear
-              </button>
-              <button
-                className="bg-black flex-1 py-2.5 rounded-md text-white text-lg active:bg-neutral-800"
-                onClick={async () => {
-                  await mutateAsync({ kind, amount });
-                  setOpen(false);
-                  setKind("Food");
-                  setAmount(0);
-                }}
-              >
-                Add
-              </button>
-            </div>
+            <button
+              className="bg-black w-full mt-3 py-2.5 rounded-md text-white text-lg active:bg-neutral-800"
+              onClick={async () => {
+                await mutateAsync({ kind, amount });
+                setOpen(false);
+                setKind("Food");
+                setAmount(0);
+              }}
+            >
+              Add
+            </button>
           </div>
         </Drawer.Content>
       </Drawer.Portal>
