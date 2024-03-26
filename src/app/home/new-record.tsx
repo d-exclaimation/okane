@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { Drawer } from "vaul";
 import { useNewRecordMutation } from "../../data/mutation";
 import { KindToEmojis } from "../../data/types";
+import { dollarsAndCents } from "../../utils/money";
 import AmountShowcase from "./amount-showcase";
 import Keypad from "./keypad";
 import KindSelector from "./kind-selector";
@@ -15,14 +16,7 @@ const NewRecord = () => {
   const [amount, setAmount] = useState(0);
   const [kind, setKind] = useState<Kind>("Food");
 
-  const [dollars, cents] = useMemo(() => {
-    const dollars = Math.floor(amount);
-    const cents = Math.round((amount - Math.floor(amount)) * 100);
-
-    console.log({ dollars, cents, value: amount });
-
-    return [dollars, cents] as const;
-  }, [amount]);
+  const [dollars, cents] = useMemo(() => dollarsAndCents(amount), [amount]);
 
   return (
     <Drawer.Root open={open} onOpenChange={setOpen}>

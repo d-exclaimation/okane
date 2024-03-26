@@ -19,7 +19,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/settings",
-        element: <div>Settings</div>,
+        element: (
+          <div className="grid place-items-center w-screen h-screen-safe">
+            Settings
+          </div>
+        ),
       },
     ],
   },

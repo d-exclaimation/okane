@@ -13,24 +13,29 @@ export function useSavedUp() {
         R.map((record) => ({
           ...record,
           createdAt: new Date(record.createdAt),
-        }))
+        })),
+        R.sortBy((record) => -record.createdAt.getTime())
       ),
     [data]
   );
 
-  const totalOfTheWeek = useMemo(() => {
-    const total = R.pipe(
-      records,
-      R.filter((record) => isWithinTheSameWeek(record.createdAt, new Date())),
-      R.reduce((acc, record) => acc + record.amount, 0)
-    );
+  const weekly = useMemo(
+    () =>
+      R.pipe(
+        records,
+        R.filter((record) => isWithinTheSameWeek(record.createdAt, new Date()))
+      ),
+    [records]
+  );
 
-    return {
-      total,
-      dollar: Math.floor(total),
-      cents: Math.round((total - Math.floor(total)) * 100),
-    };
-  }, [records]);
+  const totalOfTheWeek = useMemo(
+    () =>
+      R.pipe(
+        weekly,
+        R.reduce((acc, record) => acc + record.amount, 0)
+      ),
+    [records]
+  );
 
   const daily = useMemo(
     () =>
@@ -43,13 +48,15 @@ export function useSavedUp() {
             date: records[0].createdAt,
             records: R.sortBy(records, (record) => -record.createdAt.getTime()),
           };
-        })
+        }),
+        R.sortBy((record) => -record.date.getTime())
       ),
     [records]
   );
 
   return {
     totalOfTheWeek,
+    weekly,
     daily,
     records,
   };

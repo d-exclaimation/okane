@@ -8,8 +8,8 @@ const App = () => {
   const pathname = location.pathname;
 
   return (
-    <div className="flex flex-col w-screen h-screen">
-      <div className="flex-1 w-full flex flex-col items-center justify-start">
+    <div className="flex flex-col w-screen h-screen-safe">
+      <div className="flex-1 w-full flex flex-col items-center justify-start pb-2">
         <Outlet />
       </div>
       <div className="sticky z-10 bottom-safe flex items-center justify-center gap-x-28 w-full bg-gray-100 mt-auto px-4 pt-4 pb-safe-offset-12">
