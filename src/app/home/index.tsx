@@ -14,13 +14,13 @@ import Daily from "./daily";
 import NewRecord from "./new-record";
 
 const Home = () => {
-  const { totalOfTheWeek, weekly, daily } = useSavedUp();
+  const { totalOfTheWeek, daily } = useSavedUp();
   const [showcase, setShowcase] = useState<"saved" | "spent">("saved");
 
   const [dollars, cents] = useMemo(() => {
     const value =
       showcase === "saved"
-        ? weekly.length * DailyBudget - totalOfTheWeek
+        ? daily.length * DailyBudget - totalOfTheWeek
         : totalOfTheWeek;
     return dollarsAndCents(value);
   }, [totalOfTheWeek, showcase]);

@@ -14,10 +14,7 @@ const Daily = ({ date, records }: DailyProps) => {
     R.sumBy((x) => x.amount)
   );
 
-  const saved = R.pipe(
-    records,
-    R.sumBy((x) => DailyBudget - x.amount)
-  );
+  const saved = DailyBudget - total;
 
   return (
     <div className="flex flex-col w-full items-center justify-center py-2 px-4">
@@ -43,21 +40,12 @@ const Daily = ({ date, records }: DailyProps) => {
         </div>
       </div>
       {records.map(({ amount, id, kind }) => {
-        const saved = DailyBudget - amount;
         return (
           <div key={id} className="w-full flex items-center justify-between">
             <span className="text-3xl p-5">{EMOJIS[kind]}</span>
             <div className="w-full flex items-center gap-4 py-4 border-b border-gray-200 text-lg font-medium">
               <span>{kind}</span>
               <span className="ml-auto">${amount.toFixed(2)}</span>
-              <span
-                className={tlsx("text-sm text-green-700", {
-                  "text-red-700": saved < 0,
-                })}
-              >
-                {saved >= 0 ? "+" : "-"}
-                {Math.abs(saved).toFixed(2)}
-              </span>
             </div>
           </div>
         );
