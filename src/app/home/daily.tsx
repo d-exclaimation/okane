@@ -38,7 +38,7 @@ const Daily = ({ date, records }: DailyProps) => {
             })}
           >
             {saved >= 0 ? "+" : "-"}
-            {saved.toFixed(2)}
+            {Math.abs(saved).toFixed(2)}
           </span>
         </div>
       </div>
@@ -56,7 +56,7 @@ const Daily = ({ date, records }: DailyProps) => {
                 })}
               >
                 {saved >= 0 ? "+" : "-"}
-                {saved.toFixed(2)}
+                {Math.abs(saved).toFixed(2)}
               </span>
             </div>
           </div>

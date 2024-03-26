@@ -66,7 +66,7 @@ const Keypad = ({ value, setValue }: KeypadProps) => {
 
       <button
         className="w-full h-full [aspect-ratio:5/4] flex items-center justify-center border rounded-lg text-2xl transition-all duration-300 active:bg-neutral-100"
-        onClick={() => setValue(value * 10)}
+        onClick={() => (isDollar ? addDollars : addCents)(0)}
       >
         0
       </button>
