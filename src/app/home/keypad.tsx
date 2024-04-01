@@ -38,11 +38,13 @@ const Keypad = ({ value, setValue }: KeypadProps) => {
     const dollars = Math.floor(value);
     const cents = (value - dollars) * 100;
     const digits = cents.toString().padStart(2, "0").split("");
-    const index = Math.max(
-      0,
-      digits.findIndex((d) => d === "0")
-    );
-    digits[index] = cent.toString();
+    const index = digits.findIndex((d) => d === "0");
+    if (index === -1) {
+      digits[0] = cent.toString();
+      digits[1] = "0";
+    } else {
+      digits[index] = cent.toString();
+    }
     const updatedValue = dollars + Number(digits.join("")) / 100;
     setValue(updatedValue);
   };

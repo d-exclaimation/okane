@@ -1,15 +1,15 @@
 import { func } from "./func";
 
+/**
+ * Check if the date is within 7 days of the current date
+ * @param date - The date to check
+ * @param now - The current date
+ * @returns True if the date is within 7 days of the current date
+ */
 export const isWithinTheSameWeek = func((date: Date, now: Date) => {
-  const todayDate = now.getDate();
-  const todayDay = now.getDay();
+  // get different in date and now (in days)
+  const diff = Math.abs(date.getDate() - now.getDate());
 
-  // get first date of week
-  const firstDayOfWeek = new Date(now.setDate(todayDate - todayDay));
-
-  // get last date of week
-  const lastDayOfWeek = new Date(firstDayOfWeek);
-  lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 6);
-
-  return date >= firstDayOfWeek && date <= lastDayOfWeek;
+  // if the date is within 7 days of the current date
+  return diff <= 7;
 });
